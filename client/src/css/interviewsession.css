@@ -1,0 +1,313 @@
+/* interviewsession.css */
+.interview-app {
+  --primary-dark: #111827;
+  --secondary-dark: #1e293b;
+  --accent-blue: #3b82f6;
+  --text-light: #f3f4f6;
+  --text-gray: #94a3b8;
+  --border-color: #2d3748;
+  --button-start: #4ade80;
+  --button-stop: #ef4444;
+  --button-neutral: #6b7280;
+  --button-disabled: #374151;
+  
+  color: var(--text-light);
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+}
+
+/* App Container */
+.interview-app {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background-color: var(--primary-dark);
+}
+
+/* Header */
+.interview-app .app-header {
+  background-color: var(--primary-dark);
+  padding: 1rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.interview-app .logo {
+  display: flex;
+  align-items: center;
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+.interview-app .logo-icon {
+  margin-right: 0.5rem;
+}
+
+.interview-app .nav-links {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.interview-app .nav-link {
+  display: flex;
+  align-items: center;
+  color: var(--text-gray);
+  text-decoration: none;
+  font-size: 0.875rem;
+  transition: color 0.2s;
+}
+
+.interview-app .nav-link.active {
+  color: var(--text-light);
+  font-weight: 500;
+}
+
+.interview-app .nav-icon {
+  margin-right: 0.5rem;
+}
+
+/* Main Content */
+.interview-app .main-content {
+  flex: 1;
+  max-width: 100vw;
+  margin: 0 auto;
+  padding: 2rem;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* Section Styles */
+.interview-app .section-heading {
+  font-size: 1rem;
+  color: var(--text-gray);
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+}
+
+/* Question Section */
+.interview-app .question-section {
+  background-color: var(--secondary-dark);
+  padding: 1.5rem;
+
+  border-radius: 0.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.interview-app .ai-question {
+  font-size: 1.125rem;
+  margin: 0;
+  color: var(--text-light);
+}
+
+/* Video Section */
+.interview-app .video-section {
+  background-color: var(--secondary-dark);
+  border-radius: 0.5rem;
+  margin-bottom: 1.5rem;
+  min-height: 300px;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.interview-app .video-container {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.interview-app .video-icon {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 3rem;
+  color: var(--text-gray);
+  opacity: 0.7;
+  pointer-events: none;
+}
+
+/* Controls Section */
+.interview-app .controls-section {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.interview-app .control-button {
+  flex: 1;
+  padding: 0.75rem 1rem;
+  border-radius: 0.5rem;
+  border: none;
+  color: white;
+  font-weight: 500;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  transition: opacity 0.2s, background-color 0.2s;
+}
+
+.interview-app .control-button.start {
+  background-color: var(--button-start);
+}
+
+.interview-app .control-button.stop {
+  background-color: var(--button-stop);
+}
+
+.interview-app .control-button.disabled {
+  background-color: var(--button-disabled);
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
+.interview-app .button-icon {
+  font-size: 1.125rem;
+}
+
+/* Answer Section */
+.interview-app .answer-section {
+  background-color: var(--secondary-dark);
+  padding: 1.5rem;
+  border-radius: 0.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.interview-app .answer-content {
+  min-height: 5rem;
+}
+
+.interview-app .placeholder-text {
+  color: var(--text-gray);
+  font-style: italic;
+}
+
+/* Feedback Section */
+.interview-app .feedback-section {
+  background-color: var(--secondary-dark);
+  padding: 1.5rem;
+  border-radius: 0.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.interview-app .feedback-list {
+  margin: 0;
+  padding-left: 1.5rem;
+}
+
+.interview-app .feedback-item {
+  margin-bottom: 0.5rem;
+}
+
+.interview-app .feedback-item:last-child {
+  margin-bottom: 0;
+}
+
+/* End Interview Button */
+.interview-app .end-interview-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 2rem;
+}
+
+.interview-app .end-interview-button {
+  background-color: var(--button-neutral);
+  color: white;
+  border: none;
+  padding: 0.75rem 2rem;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  font-weight: 500;
+  transition: background-color 0.2s;
+}
+
+.interview-app .end-interview-button:hover {
+  background-color: var(--button-stop);
+}
+
+/* Modal Popup */
+.popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.6);
+  z-index: 1000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.popup {
+  background: #121212;
+  color: #fff;
+  border: 2px solid #444;
+  border-radius: 12px;
+  padding: 2rem;
+  width: 300px;
+  max-width: 90%;
+  box-shadow: 0 0 15px rgba(255, 255, 255, 0.1);
+  text-align: center;
+}
+
+.popup h3 {
+  margin-bottom: 1rem;
+  font-size: 1.3rem;
+}
+
+.popup input {
+  width: 100%;
+  padding: 0.6rem;
+  font-size: 1rem;
+  border-radius: 8px;
+  border: 1px solid #555;
+  background: #1e1e1e;
+  color: #fff;
+  margin-bottom: 0.8rem;
+}
+
+.popup .error-text {
+  color: #ff6b6b;
+  font-size: 0.9rem;
+  margin-bottom: 0.8rem;
+}
+
+.popup-actions {
+  display: flex;
+  justify-content: space-between;
+}
+
+.popup-actions button {
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 500;
+  background-color: #4a90e2;
+  color: #fff;
+  transition: background-color 0.3s ease;
+}
+
+.popup-actions button:hover {
+  background-color: #357ac9;
+}
+
+.popup-actions button:last-child {
+  background-color: #555;
+}
+
+.popup-actions button:last-child:hover {
+  background-color: #777;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .interview-app .controls-section {
+    flex-direction: column;
+  }
+}

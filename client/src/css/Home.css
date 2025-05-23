@@ -1,0 +1,102 @@
+/* src/css/HomeStandalone.css */
+
+.home-container {
+  min-height: 100vh;
+  background: linear-gradient(to bottom right, #1e1e2f, #2b2d42);
+  color: #ffffff;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.home-header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.home-header h1 {
+  font-size: 3rem;
+  margin-bottom: 0.5rem;
+  color: #f9f9fa;
+}
+
+.home-header p {
+  font-size: 1.25rem;
+  color: #d6d6e1;
+}
+
+.home-buttons {
+  margin-top: 2rem;
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.home-primary-btn,
+.home-glass-btn {
+  padding: 0.8rem 2rem;
+  border-radius: 10px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.home-primary-btn {
+  background: #4f46e5;
+  color: #ffffff;
+  border: none;
+}
+
+.home-primary-btn:hover {
+  background: #6366f1;
+}
+
+.home-glass-btn {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #ffffff;
+  backdrop-filter: blur(6px);
+}
+
+.home-glass-btn:hover {
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.home-features {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  width: 100%;
+  max-width: 900px;
+  margin-top: 3rem;
+}
+
+.home-feature-card {
+  background: rgba(255, 255, 255, 0.05);
+  padding: 1.5rem;
+  border-radius: 12px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  transition: transform 0.2s ease;
+}
+
+.home-feature-card:hover {
+  transform: translateY(-5px);
+}
+
+.home-feature-card h3 {
+  margin-bottom: 0.5rem;
+  color: #a5b4fc;
+}
+
+.home-feature-card p {
+  color: #e0e0e0;
+}
+
+@media (min-width: 768px) {
+  .home-features {
+    flex-direction: row;
+  }
+}

@@ -2,8 +2,9 @@ const analyse = require('../controller/main.controller')
 const router = require('express').Router();
 
 router.post('/analyze', analyse.mainFunction);
-// router.post('/save', analyse.save);
-// router.get('/history', analyse.history);
-
+router.post('/start-session', analyse.startInterviewSession);
+router.post('/record-session', analyse.recordInterviewStep);
+router.post('/check-session-name', analyse.checkSessionName)
+router.post('/set-session-name', analyse.setSessionName)
 
 module.exports = router;

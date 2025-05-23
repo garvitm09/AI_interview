@@ -1,39 +1,45 @@
 import { Link, useNavigate } from "react-router-dom";
-import { useEffect, useState } from "react";
-import '../css/Navbar.css';
+import { useState } from "react";
+import "../css/Navbar.css";
 
-function NavBar() {
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
+function NavBar({ isAuthenticated, setIsAuthenticated }) {
   const navigate = useNavigate();
-
-  useEffect(() => {
-    const token = localStorage.getItem('token');
-    setIsAuthenticated(!!token);
-  }, []);
+  const [menuOpen, setMenuOpen] = useState(false);
 
   const handleLogout = () => {
-    localStorage.removeItem('token');
-    localStorage.removeItem('loggedInUser');
+    localStorage.removeItem("token");
+    localStorage.removeItem("loggedInUser");
     setIsAuthenticated(false);
-    navigate('/login');
+    navigate("/login");
+  };
+
+  const toggleMenu = () => {
+    setMenuOpen(!menuOpen);
   };
 
   return (
     <nav className="navbar">
-      <div className="navbar-brand">
-        <Link to="/">Movie App</Link>
+      <div className="navbar-left">
+        <Link to="/" className="navbar-logo">COMPANION</Link>
       </div>
-      <div className="navbar-links">
-        <Link to="/" className="nav-link">Home</Link>
+
+      <div className="hamburger" onClick={toggleMenu}>
+        ☰
+      </div>
+
+      <div className={`navbar-right ${menuOpen ? "open" : ""}`}>
         {isAuthenticated ? (
           <>
-            <Link to="/favorites" className="nav-link">Favorites</Link>
-            <button onClick={handleLogout} className="nav-link">Logout</button>
+            <Link to="/" className="nav-item" onClick={toggleMenu}>Home</Link>
+            <Link to="/interview" className="nav-item" onClick={toggleMenu}>Interview</Link>
+            <Link to="/dashboardqna" className="nav-item" onClick={toggleMenu}>Dashboard</Link>
+            <button onClick={() => { handleLogout(); toggleMenu(); }} className="nav-item nav-button">Logout</button>
+            <div className="nav-avatar">👤 You</div>
           </>
         ) : (
           <>
-            <Link to="/login" className="nav-link">Login</Link>
-            <Link to="/signup" className="nav-link">Signup</Link>
+            <Link to="/login" className="nav-item" onClick={toggleMenu}>Login</Link>
+            <Link to="/signup" className="nav-item" onClick={toggleMenu}>Signup</Link>
           </>
         )}
       </div>

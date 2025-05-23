@@ -1,0 +1,37 @@
+{
+  "rubrics": {
+    "technical": {
+      "technical_accuracy": 20,
+      "depth_of_knowledge": 15,
+      "problem_solving_approach": 15,
+      "relevance": 10,
+      "clarity": 10,
+      "completeness": 10,
+      "use_of_examples": 10,
+      "communication_style": 5,
+      "confidence_inferred": 3,
+      "originality": 2
+    },
+    "behavioral": {
+      "clarity": 15,
+      "relevance": 15,
+      "structure": 15,
+      "completeness": 10,
+      "use_of_examples": 15,
+      "depth_of_insight": 10,
+      "communication_style": 10,
+      "confidence_inferred": 5,
+      "originality": 5
+    },
+    "hr": {
+      "motivation_and_intent": 20,
+      "cultural_fit_inferred": 20,
+      "clarity": 15,
+      "communication_style": 10,
+      "relevance": 10,
+      "use_of_examples": 10,
+      "confidence_inferred": 10,
+      "originality": 5
+    }
+  }
+}

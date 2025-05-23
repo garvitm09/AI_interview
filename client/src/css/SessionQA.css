@@ -1,0 +1,208 @@
+.qa-container {
+  background-color:#0f111a;
+  min-height: 100vh;
+  padding: 2rem;
+  color:white;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.qa-container h1 {
+  color: #fff;
+  font-size: 2rem;
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.qa-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.5rem;
+}
+
+.qa-card {
+  background-color: #1e2233;
+  border-radius: 16px;
+  padding: 1.5rem;
+  color: #d1d5db;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+}
+
+.qa-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.5);
+}
+
+.qa-card h2 {
+  font-size: 1.1rem;
+  color: #ffffff;
+  margin-bottom: 0.8rem;
+}
+
+.qa-card p {
+  font-size: 0.95rem;
+  line-height: 1.5;
+  margin-bottom: 0.5rem;
+  color: #c0c0c0;
+}
+
+.qa-card strong {
+  color: #ffffff;
+}
+
+.qa-card button {
+  align-self: flex-end;
+  margin-top: auto;
+  background-color: #2f2f35;
+  color: #f0f0f0;
+  padding: 0.5rem 1.2rem;
+  border-radius: 9999px;
+  border: none;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: background-color 0.2s ease;
+}
+
+.qa-card button:hover {
+  background-color: #3a3a42;
+}
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(15, 15, 30, 0.65);
+  backdrop-filter: blur(12px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  padding: 1rem;
+  animation: overlayFade 0.3s ease-in-out;
+}
+
+@keyframes overlayFade {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.modal-content {
+  background: rgba(30, 30, 60, 0.85);
+  color: #ffffff;
+  padding: 2rem;
+  border-radius: 20px;
+  width: 100%;
+  max-width: 700px;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
+  position: relative;
+  animation: modalPopIn 0.4s ease;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+@keyframes modalPopIn {
+  from {
+    transform: translateY(40px) scale(0.95);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+  }
+}
+
+.modal-close {
+  position: absolute;
+  top: 16px;
+  right: 18px;
+  background: transparent;
+  border: none;
+  font-size: 1.8rem;
+  color: #ffffff;
+  cursor: pointer;
+  font-weight: bold;
+  transition: transform 0.2s ease, color 0.2s ease;
+}
+
+.modal-close:hover {
+  transform: scale(1.1);
+  color: #f87171;
+}
+
+.modal-body {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.modal-body h2 {
+  font-size: 1.6rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  color: #a5b4fc;
+}
+
+.modal-body p {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: #e5e7eb;
+  border-left: 3px solid #6366f1;
+  padding-left: 0.75rem;
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 6px;
+}
+
+.modal-body strong {
+  color: #facc15;
+}
+
+/* Custom scrollbar for modal */
+.modal-content::-webkit-scrollbar {
+  width: 8px;
+}
+.modal-content::-webkit-scrollbar-track {
+  background: transparent;
+}
+.modal-content::-webkit-scrollbar-thumb {
+  background: #6366f1;
+  border-radius: 10px;
+}
+
+/* Responsive improvements */
+@media (max-width: 768px) {
+  .modal-content {
+    padding: 1.5rem;
+    max-width: 95%;
+  }
+
+  .modal-body h2 {
+    font-size: 1.3rem;
+  }
+
+  .modal-body p {
+    font-size: 0.95rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .modal-content {
+    padding: 1rem;
+  }
+
+  .modal-body h2 {
+    font-size: 1.1rem;
+  }
+
+  .modal-body p {
+    font-size: 0.9rem;
+  }
+}
+

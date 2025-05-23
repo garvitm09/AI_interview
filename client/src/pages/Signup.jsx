@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { ToastContainer } from 'react-toastify';
-// import { APIUrl, handleError, handleSuccess } from '../utils';
-const APIUrl = 'http://localhost:5000'
+import { APIUrl, handleError, handleSuccess } from '../utils/utils';
+import '../css/Signup.css'
 
 function Signup() {
 
@@ -55,6 +55,8 @@ function Signup() {
         }
     }
     return (
+        <div className='SignupContainer'>
+
         <div className='container'>
             <h1>Signup</h1>
             <form onSubmit={handleSignup}>
@@ -68,7 +70,7 @@ function Signup() {
                         autoFocus
                         placeholder='Enter your name...'
                         value={signupInfo.name}
-                    />
+                        />
                 </div>
                 <div>
                     <label htmlFor='email'>Email</label>
@@ -78,7 +80,7 @@ function Signup() {
                         name='email'
                         placeholder='Enter your email...'
                         value={signupInfo.email}
-                    />
+                        />
                 </div>
                 <div>
                     <label htmlFor='password'>Password</label>
@@ -90,13 +92,15 @@ function Signup() {
                         value={signupInfo.password}
                     />
                 </div>
-                <button type='submit'>Signup</button>
-                <span>Already have an account ?
-                    <Link to="/login">Login</Link>
+                <div className='signup-btn'>
+                    <button type='submit'>Signup</button>
+                </div>
+                <span className="login-link">Already have an account ? <Link to="/login">Login</Link>
                 </span>
             </form>
             <ToastContainer />
         </div>
+    </div>
     )
 }
 
