@@ -8,7 +8,11 @@ const interviewRoutes = require("./routes/interview");
 const qnaRoutes = require("./routes/qna")
 const auth = require('./routes/auth');
 
-app.use(cors());
+app.use(cors({ 
+  origin: 'https://ai-interview-client-woad.vercel.app/login',
+  credentials: true
+}));
+
 app.use(express.json());
 
 require('./Middlewares/db');

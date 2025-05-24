@@ -9,12 +9,12 @@ const Dashboardqna = () => {
   const [sortOrder, setSortOrder] = useState("recent");
   const [search, setSearch] = useState("");
   const navigate = useNavigate();
-
+  const API_BASE_URL = import.meta.env.VITE_API_URL;
   const fetchSessions = async () => {
     const email = localStorage.getItem("userEmail");
     console.log
     const res = await fetch(
-      `http://localhost:5000/api/qna/sessions/${email}?sort=${sortOrder}&search=${search}&filter=${filter}`
+      `${API_BASE_URL}/api/qna/sessions/${email}?sort=${sortOrder}&search=${search}&filter=${filter}`
     );
     const data = await res.json();
     setSessions(data.sessions);

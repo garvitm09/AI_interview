@@ -6,13 +6,13 @@ import { useAuth } from '../components/AuthContext';
 import '../css/interviewsession.css';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+const API_BASE_URL = import.meta.env.VITE_API_URL;
 
 export default function InterviewSession() {
   const location = useLocation();
   const navigate = useNavigate();
   const { role, experience, type, sessionId } = location.state || {};
   const { userInfo } = useAuth();
-
   const [startTime, setStartTime] = useState(null);
   const [endTime, setEndTime] = useState(null);
   const [question, setQuestion] = useState("Tell me about yourself.");
@@ -72,7 +72,7 @@ export default function InterviewSession() {
     setListening(false);
 
     console.log({transcript, role, experience, type, userInfo})
-    const response = await fetch("http://localhost:5000/api/interview/analyze", {
+    const response = await fetch(`${API_BASE_URL}0/api/interview/analyze`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ transcript, role, experience, type, userInfo }),
@@ -82,7 +82,7 @@ export default function InterviewSession() {
     setAIResponse(data.feedback);
     setQuestion(data.nextQuestion);
 
-    await fetch("http://localhost:5000/api/interview/record-session", {
+    await fetch(`${API_BASE_URL}/api/interview/record-session`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -117,7 +117,7 @@ export default function InterviewSession() {
     }
 
     // Check for duplicate name
-    const res = await fetch("http://localhost:5000/api/interview/check-session-name", {
+    const res = await fetch(`${API_BASE_URL}/api/interview/check-session-name`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ sessionName, userId: userInfo._id }),
@@ -131,7 +131,7 @@ export default function InterviewSession() {
     }
 
     // Name is unique → Save name and navigate
-    await fetch("http://localhost:5000/api/interview/set-session-name", {
+    await fetch(`${API_BASE_URL}/api/interview/set-session-name`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ sessionId, sessionName }),

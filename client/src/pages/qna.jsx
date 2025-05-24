@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from "react";
 import "../css/SessionQA.css";
 import { useLocation } from "react-router-dom";
+const API_BASE_URL = import.meta.env.VITE_API_URL;
 
 const SessionQA = () => {
     const location = useLocation();
@@ -12,7 +13,7 @@ const SessionQA = () => {
 useEffect(() => {
   const fetchSessionData = async () => {
     try {
-      const response = await fetch(`http://localhost:5000/api/qna/${sessionId}/qna-get`);
+      const response = await fetch(`${API_BASE_URL}/api/qna/${sessionId}/qna-get`);
       
       const data = await response.json();
       console.log("Fetched data:", data); // 👈 Log the full object

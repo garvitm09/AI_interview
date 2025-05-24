@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../components/AuthContext';
 import '../css/Interview.css';
+const API_BASE_URL = import.meta.env.VITE_API_URL;
 
 const DropdownPage = () => {
   const [role, setRole] = useState('');
@@ -10,7 +11,6 @@ const DropdownPage = () => {
   const { userInfo } = useAuth();
   const [experience, setExperience] = useState('');
   const navigate = useNavigate();
-
   const handleStartInterview = async () => {
     if (!role || !experience) {
       alert("Please select a role and enter experience.");
@@ -18,7 +18,7 @@ const DropdownPage = () => {
     }
   
     try {
-      const response = await fetch("http://localhost:5000/api/interview/start-session", {
+      const response = await fetch(`${API_BASE_URL}/api/interview/start-session`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email: userInfo.email, role, type, experience }),
