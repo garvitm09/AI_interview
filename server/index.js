@@ -3,7 +3,7 @@ const express = require("express");
 const cors = require("cors");
 
 const app = express();
-const port = 5000;
+const port = process.env.PORT;
 const interviewRoutes = require("./routes/interview");
 const qnaRoutes = require("./routes/qna")
 const auth = require('./routes/auth');

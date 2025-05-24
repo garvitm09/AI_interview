@@ -1,7 +1,7 @@
 const axios = require("axios");
 const User = require('../models/User');
 const Session = require('../models/InterviewSession');
-const OPENROUTER_API_KEY = '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';
+const OPENROUTER_API_KEY = process.env.OPENROUTER_API_KEY;
 
 
 exports.save = async (req, res) => {
