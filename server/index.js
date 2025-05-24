@@ -8,8 +8,11 @@ const interviewRoutes = require("./routes/interview");
 const qnaRoutes = require("./routes/qna")
 const auth = require('./routes/auth');
 
-app.use(cors({ 
-  origin: 'https://ai-interview-client-woad.vercel.app/login',
+app.use(cors({
+  origin: [
+    'https://ai-interview-client-dfapbpw84-garvit-mathurs-projects.vercel.app',
+    'https://ai-interview-client-woad.vercel.app'
+  ],
   credentials: true
 }));
 
