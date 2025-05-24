@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 
-mongoose.connect(process.env.MONGO_URI)
+mongoose.connect('mongodb+srv://garvitbkn10:garvit@garvitm09.cm9avcf.mongodb.net/AI_Interview')
     .then(() => {
         console.log('MongoDB Connected...');
     }).catch((err) => {
