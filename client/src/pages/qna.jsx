@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from "react";
 import "../css/SessionQA.css";
 import { useLocation } from "react-router-dom";
-const API_BASE_URL = import.meta.env.VITE_API_URL;
+const API_BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:5000";
 
 const SessionQA = () => {
     const location = useLocation();

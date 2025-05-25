@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "../css/Dashboard.css";
 import { useNavigate } from "react-router-dom";
+const API_BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:5000";
 
 
 const Dashboardqna = () => {
@@ -9,7 +10,6 @@ const Dashboardqna = () => {
   const [sortOrder, setSortOrder] = useState("recent");
   const [search, setSearch] = useState("");
   const navigate = useNavigate();
-  const API_BASE_URL = import.meta.env.VITE_API_URL;
   const fetchSessions = async () => {
     const email = localStorage.getItem("userEmail");
     console.log
