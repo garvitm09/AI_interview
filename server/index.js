@@ -26,6 +26,14 @@ app.use(cors({
   },
   credentials: true
 }));
+
+app.options('*', cors());
+
+app.use((req, res, next) => {
+  console.log('Request Origin:', req.headers.origin);
+  next();
+});
+
 app.use(express.json());
 
 require('./Middlewares/db');
