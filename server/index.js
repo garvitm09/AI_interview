@@ -10,10 +10,11 @@ const auth = require('./routes/auth');
 
 const allowedOrigins = [
   'https://ai-interview-client-dfapbpw84-garvit-mathurs-projects.vercel.app',
-  'https://ai-interview-client-woad.vercel.app/',
-  'https://ai-interview-client-garvit-mathurs-projects.vercel.app/',
-  'https://ai-interview-client-git-main-garvit-mathurs-projects.vercel.app/'
+  'https://ai-interview-client-woad.vercel.app',
+  'https://ai-interview-client-garvit-mathurs-projects.vercel.app',
+  'https://ai-interview-client-git-main-garvit-mathurs-projects.vercel.app'
 ];
+
 // app.use(cors());
 app.use(cors({
   origin: (origin, callback) => {
@@ -27,12 +28,6 @@ app.use(cors({
   credentials: true
 }));
 
-app.options('*', cors());
-
-app.use((req, res, next) => {
-  console.log('Request Origin:', req.headers.origin);
-  next();
-});
 
 app.use(express.json());
 
