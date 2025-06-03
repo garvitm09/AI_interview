@@ -1,10 +1,15 @@
 import { Link, useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import "../css/Navbar.css";
 
 function NavBar({ isAuthenticated, setIsAuthenticated }) {
   const navigate = useNavigate();
   const [menuOpen, setMenuOpen] = useState(false);
+  const [dropdownOpen, setDropdownOpen] = useState(false);
+  const dropdownRef = useRef(null);
+
+  const loggedInUser = localStorage.getItem("loggedInUser");
+
 
   const handleLogout = () => {
     localStorage.removeItem("token");
@@ -16,6 +21,23 @@ function NavBar({ isAuthenticated, setIsAuthenticated }) {
   const toggleMenu = () => {
     setMenuOpen(!menuOpen);
   };
+
+  const toggleDropdown = () => {
+    setDropdownOpen(!dropdownOpen);
+  };
+
+  // Close dropdown on outside click
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setDropdownOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
 
   return (
     <nav className="navbar">
@@ -33,8 +55,19 @@ function NavBar({ isAuthenticated, setIsAuthenticated }) {
             <Link to="/" className="nav-item" onClick={toggleMenu}>Home</Link>
             <Link to="/interview" className="nav-item" onClick={toggleMenu}>Interview</Link>
             <Link to="/dashboardqna" className="nav-item" onClick={toggleMenu}>Dashboard</Link>
-            <button onClick={() => { handleLogout(); toggleMenu(); }} className="nav-item nav-button">Logout</button>
-            <div className="nav-avatar">👤 You</div>
+
+            <div className="nav-avatar-container" ref={dropdownRef}>
+              <div className="nav-avatar" onClick={toggleDropdown}>
+                👤 {loggedInUser?.split(" ")[0] || "User"} ▼
+              </div>
+              {dropdownOpen && (
+                <div className="dropdown-menu">
+                  <div className="dropdown-item">{loggedInUser?.name}</div>
+                  <hr style={{ margin: '4px 0', borderColor: '#444' }} />
+                  <button onClick={handleLogout} className="dropdown-item">Logout</button>
+                </div>
+              )}
+            </div>
           </>
         ) : (
           <>

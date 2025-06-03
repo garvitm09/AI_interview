@@ -1,0 +1,59 @@
+.charts-wrapper {
+  padding: 20px;
+  background-color: #1e1e2f; /* dark background */
+  color: #f1f1f1; /* light text */
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.6);
+  margin-top: 20px;
+}
+
+.wpm-section {
+  margin: 30px 0;
+}
+
+.wpm-bar-container {
+  margin-top: 10px;
+}
+
+.wpm-labels {
+  display: flex;
+  justify-content: space-between;
+  font-size: 14px;
+  margin-bottom: 5px;
+  color: #ccc; /* light grey for labels */
+}
+
+.wpm-bar {
+  background-color: #444; /* darker bar base */
+  border-radius: 8px;
+  height: 30px;
+  overflow: hidden;
+}
+
+.wpm-bar-fill {
+  height: 100%;
+  line-height: 30px;
+  text-align: center;
+  color: #fff;
+  font-weight: bold;
+  border-radius: 8px;
+}
+
+.pie-charts-section {
+  display: flex;
+  gap: 40px;
+  margin-top: 40px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.pie-chart-block {
+  flex: 1 1 300px;
+  max-width: 400px;
+  text-align: center;
+  color: #f1f1f1; /* ensure text in pie chart headings is light */
+}
+
+h2, h3 {
+  color: #aabfff; /* soft accent color for headings */
+}

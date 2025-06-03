@@ -72,7 +72,7 @@ export default function InterviewSession() {
     setListening(false);
 
     console.log({transcript, role, experience, type, userInfo})
-    const response = await fetch(`${API_BASE_URL}0/api/interview/analyze`, {
+    const response = await fetch(`${API_BASE_URL}/api/interview/analyze`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ transcript, role, experience, type, userInfo }),
@@ -197,16 +197,7 @@ export default function InterviewSession() {
           </div>
         </section>
 
-        {aiResponse && (
-          <section className="feedback-section">
-            <h2 className="section-heading">AI Feedback:</h2>
-            <ul className="feedback-list">
-              {aiResponse.split("- ").filter(Boolean).map((item, index) => (
-                <li key={index} className="feedback-item">{item.trim()}</li>
-              ))}
-            </ul>
-          </section>
-        )}
+
 
         <div className="end-interview-container">
           <button className="end-interview-button" onClick={() => setShowPopup(true)}>

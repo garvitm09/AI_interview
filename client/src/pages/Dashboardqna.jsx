@@ -62,7 +62,7 @@ const Dashboardqna = () => {
       <div className="session-list">
         {sessions.map((session, index) => (
           <div className="session-card" key={index}>
-            <div className="session-role">{session.type}</div>
+            <div className="session-role">{session.name}</div>
             <div className="session-title">
               {session.role || "Session"}
             </div>

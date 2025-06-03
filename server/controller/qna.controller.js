@@ -57,5 +57,17 @@ exports.getSessionsByUser =  async (req, res) => {
   }
 };
 
+// routes/qna.js or wherever you handle sessions
+exports.deleteQna = async (req, res) => {
+  try {
+    const { sessionId } = req.params;
+    await Session.findByIdAndDelete(sessionId);
+    res.status(200).json({ message: "Session deleted" });
+  } catch (error) {
+    console.error("Delete failed", error);
+    res.status(500).json({ error: "Internal server error" });
+  }
+};
+
 
 

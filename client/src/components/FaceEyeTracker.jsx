@@ -159,14 +159,14 @@ export default function FaceEyeTracker({ listening, onFaceMetrics }) {
           width: 640,
         }}
       />
-      <div style={{ marginTop: 20, textAlign: "center" }}>
+      {/* <div style={{ marginTop: 20, textAlign: "center" }}>
         <p>
           <strong>Emotion:</strong> <span ref={emotionRef}>--</span>
         </p>
         <p>
           <strong>Eye Contact:</strong> <span ref={eyeContactRef}>--</span>
         </p>
-      </div>
+      </div> */}
     </div>
   );
 }
