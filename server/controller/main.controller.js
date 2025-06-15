@@ -2,7 +2,6 @@ const axios = require("axios");
 const User = require('../models/User');
 const Session = require('../models/InterviewSession');
 const OPENROUTER_API_KEY = process.env.OPENROUTER_API_KEY;
-console.log(OPENROUTER_API_KEY)
 
 exports.mainFunction = async (req, res) => {
   const { transcript } = req.body;
@@ -10,32 +9,32 @@ exports.mainFunction = async (req, res) => {
   const { experience } = req.body;
   const { type } = req.body
   const { userInfo } = req.body
-
+  
   try {
     const prompt = `
-You are an AI interviewer for the job position of ${role}. The candidate has ${experience} years of work experience. This is a ${type} interview.
-They have just answered an interview question: "${transcript}".
-Your tasks are:
-Provide constructive feedback on the answer, focusing on relevance, technical/behavioral depth, structure, and clarity.
-Give an answer rating and domain knowledge rating on a scale that makes sense for this role (e.g., 1–10).
-Identify the tone of the candidate’s answer (e.g., confident, nervous, articulate, vague).
-Generate a next question that:
-Sounds natural and conversational, as if asked by a human interviewer.
-Aligns with the job role: ${role}
-Matches the candidate’s experience level: ${experience}
-Is relevant to the type of interview: ${type} (e.g., behavioral, technical, HR)
-Follows logically from the previous answer and helps assess further suitability for the role.
-For entry-level, ask foundational or scenario-based questions.
-For 1–2 years experience, include questions about past projects, decision-making, or tools used.
-For 2+ years experience, include depth-oriented or leadership/impact-focused questions.
-Point out grammatical mistakes if there were any and also give out count of filler words used
-Give your response in points rather than a paragraph for easy readability.
-Format your response exactly as follows:
-Feedback: <your analysis in bullet points>  
-What went well: <your analysis in bullet points>  
-What could be better: <your analysis in bullet points>  
-Suggested Answer: <Give an example of a possible great answer according to you>
-Grammar: <grammar in bullet points>  
+    You are an AI interviewer for the job position of ${role}. The candidate has ${experience} years of work experience. This is a ${type} interview.
+    They have just answered an interview question: "${transcript}".
+    Your tasks are:
+    Provide constructive feedback on the answer, focusing on relevance, technical/behavioral depth, structure, and clarity.
+    Give an answer rating and domain knowledge rating on a scale that makes sense for this role (e.g., 1–10).
+    Identify the tone of the candidate’s answer (e.g., confident, nervous, articulate, vague).
+    Generate a next question that:
+    Sounds natural and conversational, as if asked by a human interviewer.
+    Aligns with the job role: ${role}
+    Matches the candidate’s experience level: ${experience}
+    Is relevant to the type of interview: ${type} (e.g., behavioral, technical, HR)
+    Follows logically from the previous answer and helps assess further suitability for the role.
+    For entry-level, ask foundational or scenario-based questions.
+    For 1–2 years experience, include questions about past projects, decision-making, or tools used.
+    For 2+ years experience, include depth-oriented or leadership/impact-focused questions.
+    Point out grammatical mistakes if there were any and also give out count of filler words used
+    Give your response in points rather than a paragraph for easy readability.
+    Format your response exactly as follows:
+    Feedback: <your analysis in bullet points>  
+    What went well: <your analysis in bullet points>  
+    What could be better: <your analysis in bullet points>  
+    Suggested Answer: <Give an example of a possible great answer according to you>
+    Grammar: <grammar in bullet points>  
 Filler words: <fillers>  
 Answer rating: <answer rating>  
 Domain knowledge rating: <domain knowledge rating>  
@@ -45,22 +44,24 @@ Next question: <next question asked in a natural, conversational tone>
 
 `;
 
-    const response = await axios.post(
-      "https://openrouter.ai/api/v1/chat/completions",
-      {
+console.log(OPENROUTER_API_KEY)
+const response = await axios.post(
+  "https://openrouter.ai/api/v1/chat/completions",
+  {
         model: "openai/gpt-3.5-turbo", 
         messages: [
           { role: "user", content: prompt }
         ],
       },
       {
-        headers: {
-          "Authorization": `Bearer ${OPENROUTER_API_KEY}`,
-          "Content-Type": "application/json",
-        },
+      headers: {
+        "Authorization": `Bearer ${process.env.OPENROUTER_API_KEY}`,
+        "Content-Type": "application/json",
+        "Accept": "application/json"
+      },
       }
     );
-
+    
     const fullText = response.data.choices[0].message.content;
 
     const feedbackMatch = fullText.match(/Feedback:\s*([\s\S]*?)\n\s*\n/i);
