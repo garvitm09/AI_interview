@@ -4,19 +4,6 @@ const Session = require('../models/InterviewSession');
 const OPENROUTER_API_KEY = process.env.OPENROUTER_API_KEY;
 
 
-exports.save = async (req, res) => {
-  const session = await Session.create({
-    userId: req.userId,
-    ...req.body,
-  });
-  res.json(session);
-};
-
-exports.history = async (req, res) => {
-  const sessions = await Session.find({ userId: req.userId }).sort({ timestamp: -1 });
-  res.json(sessions);
-};
-
 exports.mainFunction = async (req, res) => {
   const { transcript } = req.body;
   const { role } = req.body;
@@ -61,7 +48,7 @@ Next question: <next question asked in a natural, conversational tone>
     const response = await axios.post(
       "https://openrouter.ai/api/v1/chat/completions",
       {
-        model: "openai/gpt-3.5-turbo", // or another model from OpenRouter
+        model: "openai/gpt-3.5-turbo", 
         messages: [
           { role: "user", content: prompt }
         ],
@@ -110,9 +97,12 @@ Next question: <next question asked in a natural, conversational tone>
       domainRating: domainMatch ? domainMatch[1] : null,
       nextQuestion: nextQMatch ? nextQMatch[1] : null,
     });
-  } catch (err) {
-    console.error(err.response?.data || err.message);
-    res.status(500).send("AI analysis failed.");
+  }  catch (error) {
+    console.error("🔥 ERROR in /analyze route:", error);
+    res.status(500).json({
+      error: error.message || "Internal Server Error",
+      stack: error.stack,
+    });
   }
 };
 

@@ -30,10 +30,9 @@ async def websocket_endpoint(websocket: WebSocket):
         data = await websocket.receive_bytes()
         audio_buffer.extend(data)
 
-        if len(audio_buffer) >= 32000:  # ~1 second of 16kHz 16-bit mono PCM audio
-            # Run inference
+        if len(audio_buffer) >= 32000:  
             audio_tensor = torch.tensor(np.frombuffer(audio_buffer, dtype=np.int16), dtype=torch.float32) / 32768.0
-            audio_tensor = audio_tensor.unsqueeze(0)  # add batch dim
+            audio_tensor = audio_tensor.unsqueeze(0)  
             inputs = processor(audio_tensor.squeeze(), sampling_rate=16000, return_tensors="pt")
             with torch.no_grad():
                 logits = model(**inputs).logits
@@ -41,8 +40,7 @@ async def websocket_endpoint(websocket: WebSocket):
             emotion_label = model.config.id2label[predicted_class]
 
             await websocket.send_text(emotion_label)
-            audio_buffer = bytearray()  # reset buffer
-
+            audio_buffer = bytearray()
 
 
 

@@ -1,4 +1,3 @@
-// models/InterviewSession.js
 const mongoose = require("mongoose");
 
 const qaSchema = new mongoose.Schema({
@@ -14,15 +13,15 @@ const qaSchema = new mongoose.Schema({
   domainRating: String,
   answerTone: String,
   metrics: {
-    emotion: String,         // from audio
-    volume: Number,          // from audio
-    wpm: Number,             // from audio
+    emotion: String,         
+    volume: Number,          
+    wpm: Number,             
     facialEmotion: {
       Confident: Number,
       Nervous: Number,
       Neutral: Number
     },
-    eyeContact: Number       // percentage
+    eyeContact: Number  
   }
 });
 

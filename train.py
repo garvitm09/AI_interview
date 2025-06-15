@@ -1,28 +1,25 @@
 import tensorflow as tf
 from tensorflow.keras.utils import image_dataset_from_directory
 from tensorflow.keras import layers, models
-# Load training dataset
+
 train_ds = image_dataset_from_directory(
-    "train",                # Path to the train folder
-    image_size=(48, 48),    # FER standard size
-    color_mode="grayscale", # Since FER images are grayscale
+    "train",              
+    image_size=(48, 48),  
+    color_mode="grayscale", 
     batch_size=32,
-    label_mode="categorical",  # For one-hot labels
+    label_mode="categorical",  
     shuffle=True,
     seed=123
 )
 
-# Optionally split into train/val manually if no val folder
 val_ds = train_ds.take(100)
 train_ds = train_ds.skip(100)
 
-# Prefetch for performance
 AUTOTUNE = tf.data.AUTOTUNE
 train_ds = train_ds.prefetch(buffer_size=AUTOTUNE)
 val_ds = val_ds.prefetch(buffer_size=AUTOTUNE)
 
-num_classes = 7  # angry, disgust, fear, happy, neutral, sad, surprise
-
+num_classes = 7  
 model = models.Sequential([
     layers.Input(shape=(48, 48, 1)),
 
