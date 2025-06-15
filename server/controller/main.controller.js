@@ -1,7 +1,7 @@
 const axios = require("axios");
 const User = require('../models/User');
 const Session = require('../models/InterviewSession');
-const OPENROUTER_API_KEY = process.env.OPENROUTER_API_KEY;
+
 
 
 exports.mainFunction = async (req, res) => {
@@ -55,7 +55,7 @@ Next question: <next question asked in a natural, conversational tone>
       },
       {
         headers: {
-          "Authorization": `Bearer ${OPENROUTER_API_KEY}`,
+          "Authorization": `Bearer ${process.env.OPENROUTER_API_KEY}`,
           "Content-Type": "application/json",
         },
       }
