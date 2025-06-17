@@ -15,6 +15,13 @@ const allowedOrigins = [
   'https://ai-interview-client-git-main-garvit-mathurs-projects.vercel.app'
 ];
 
+app.set('trust proxy', true); 
+app.use((req, res, next) => {
+  res.setHeader('Access-Control-Allow-Headers', 'Authorization, Content-Type');
+  next();
+});
+
+
 // app.use(cors());
 app.use(cors({
   origin: (origin, callback) => {

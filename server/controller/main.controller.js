@@ -165,19 +165,25 @@ exports.setSessionName = async (req, res) => {
 };
 
 
-exports.test =async (req, res) => {
-  try {
-    const result = await axios.post('https://openrouter.ai/api/v1/chat/completions', {
-      model: 'openai/gpt-3.5-turbo',
-      messages: [{ role: 'user', content: 'Hello!' }]
-    }, {
-      headers: {
-        Authorization: 'Bearer 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',
-        'Content-Type': 'application/json'
-      }
-    });
 
-    res.json({ ok: true, data: result.data });
+exports.testOpenRouter = async (req, res) => {
+  try {
+    const response = await axios.post(
+      'https://openrouter.ai/api/v1/chat/completions',
+      {
+        model: 'openai/gpt-3.5-turbo',
+        messages: [{ role: 'user', content: 'Hello from Render' }]
+      },
+      {
+        headers: {
+          'Authorization': 'Bearer sk-or-REPLACE_WITH_YOUR_KEY',
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        }
+      }
+    );
+
+    res.json(response.data);
   } catch (err) {
     console.error(err.response?.data || err.message);
     res.status(500).json({ error: err.response?.data || err.message });

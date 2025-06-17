@@ -6,6 +6,6 @@ router.post('/start-session', analyse.startInterviewSession);
 router.post('/record-session', analyse.recordInterviewStep);
 router.post('/check-session-name', analyse.checkSessionName);
 router.post('/set-session-name', analyse.setSessionName);
-router.get("/test-openrouter", analyse.test);
+router.get("/test-openrouter", analyse.testOpenRouter);
 
 module.exports = router;
