@@ -44,7 +44,7 @@ Next question: <next question asked in a natural, conversational tone>
 
 `;
 
-console.log(OPENROUTER_API_KEY)
+
 const response = await axios.post(
   "https://openrouter.ai/api/v1/chat/completions",
   {
@@ -55,13 +55,13 @@ const response = await axios.post(
       },
       {
       headers: {
-        "Authorization": `Bearer ${process.env.OPENROUTER_API_KEY}`,
+        "Authorization": `Bearer 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`,
         "Content-Type": "application/json",
         "Accept": "application/json"
       },
       }
     );
-    
+    console.log("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");
     const fullText = response.data.choices[0].message.content;
 
     const feedbackMatch = fullText.match(/Feedback:\s*([\s\S]*?)\n\s*\n/i);
