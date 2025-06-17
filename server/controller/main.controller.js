@@ -163,3 +163,23 @@ exports.setSessionName = async (req, res) => {
   await Session.findByIdAndUpdate(sessionId, { name: sessionName });
   res.json({ success: true });
 };
+
+
+exports.test =async (req, res) => {
+  try {
+    const result = await axios.post('https://openrouter.ai/api/v1/chat/completions', {
+      model: 'openai/gpt-3.5-turbo',
+      messages: [{ role: 'user', content: 'Hello!' }]
+    }, {
+      headers: {
+        Authorization: 'Bearer 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',
+        'Content-Type': 'application/json'
+      }
+    });
+
+    res.json({ ok: true, data: result.data });
+  } catch (err) {
+    console.error(err.response?.data || err.message);
+    res.status(500).json({ error: err.response?.data || err.message });
+  }
+};
