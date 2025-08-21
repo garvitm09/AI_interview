@@ -5,7 +5,7 @@ const admin = require("firebase-admin");
 
 const serviceAccount = JSON.parse(process.env.FIREBASE_SERVICE_ACCOUNT);
 const app = express();
-const port = process.env.PORT;
+const port = process.env.PORT || 5000;
 const interviewRoutes = require("./routes/interview");
 const qnaRoutes = require("./routes/qna")
 const auth = require('./routes/auth');
@@ -26,19 +26,17 @@ const allowedOrigins = [
 
 app.use(cors({
   origin: (origin, callback) => {
+    // Allow requests with no origin (like mobile apps or curl)
     if (!origin || allowedOrigins.includes(origin)) {
       callback(null, true);
     } else {
       callback(new Error('Not allowed by CORS'));
     }
   },
-  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
-  credentials: true,
-  allowedHeaders: ["Authorization", "Content-Type"]
+  methods: "GET,POST,PUT,DELETE",
+  credentials: true
 }));
 
-// Handle OPTIONS preflight explicitly
-app.options("*", cors());
 
 
 app.use(express.json());
