@@ -12,7 +12,7 @@ const Dashboardqna = () => {
   const navigate = useNavigate();
   const fetchSessions = async () => {
     const email = localStorage.getItem("userEmail");
-    console.log
+
     const res = await fetch(
       `${API_BASE_URL}/api/qna/sessions/${email}?sort=${sortOrder}&search=${search}&filter=${filter}`
     );

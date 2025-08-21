@@ -71,7 +71,6 @@ export default function InterviewSession() {
     setEndTime(Date.now());
     setListening(false);
 
-    console.log({transcript, role, experience, type, userInfo})
     const response = await fetch(`${API_BASE_URL}/api/interview/analyze`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },

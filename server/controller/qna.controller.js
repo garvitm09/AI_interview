@@ -3,7 +3,6 @@ const UserModel = require('../models/User.js');
 const Session = require('../models/InterviewSession');
 
 exports.qnaget = async (req, res) => {
-    console.log("this one")
   const session = await Session.findById(req.params.sessionId);
   if (!session) return res.status(404).json({ message: "Session not found" });
 

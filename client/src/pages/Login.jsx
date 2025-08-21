@@ -64,10 +64,7 @@ function Login() {
       const name = user.displayName;
       const email = user.email;
       const uid = user.uid;
-      const token = await user.getIdToken(); // Firebase token
-      console.log(token)
-      console.log("Google User:", { name, email, uid, token });
-      // Send token to your backend for verification
+      const token = await user.getIdToken();
       const response = await fetch(`${APIUrl}/auth/google`, {
         method: "POST",
         headers: {
@@ -77,7 +74,6 @@ function Login() {
       });
 
       const data = await response.json();
-      console.log(data.name)
 
       if (data.success) {
         handleSuccess("Logged in with Google");
