@@ -5,5 +5,6 @@ const router = require('express').Router();
 
 router.post('/login', loginValidation, auth.login);
 router.post('/signup', signupValidation, auth.signup);
+// router.post('/google', auth.google)
 
 module.exports = router;

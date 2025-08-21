@@ -44,24 +44,25 @@ Next question: <next question asked in a natural, conversational tone>
 
 `;
 
-
 const response = await axios.post(
-  "https://openrouter.ai/api/v1/chat/completions",
-  {
-        model: "openai/gpt-3.5-turbo", 
+      "https://openrouter.ai/api/v1/chat/completions",
+      {
+        model: "nousresearch/deephermes-3-llama-3-8b-preview:free",
         messages: [
-          { role: "user", content: prompt }
-        ],
+          {
+            role: "user",
+            content: prompt
+          }
+        ]
       },
       {
-      headers: {
-        "Authorization": `Bearer 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`,
-        "Content-Type": "application/json",
-        "Accept": "application/json"
-      },
+        headers: {
+          "Authorization": `Bearer ${OPENROUTER_API_KEY}`,
+          "Content-Type": "application/json"
+        }
       }
     );
-    console.log("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");
+
     const fullText = response.data.choices[0].message.content;
 
     const feedbackMatch = fullText.match(/Feedback:\s*([\s\S]*?)\n\s*\n/i);

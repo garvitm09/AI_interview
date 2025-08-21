@@ -67,3 +67,15 @@ exports.login = async (req, res) => {
     });
   }
 };
+
+
+// exports.google = async (req, res) => {
+//     try {
+//         const idToken = req.body.token; // token from frontend
+//         const decodedToken = await admin.auth().verifyIdToken(idToken);
+//         res.json({ uid: decodedToken.uid, email: decodedToken.email });
+//     } catch (error) {
+//         console.error('Token verification failed:', error);
+//         res.status(401).json({ message: 'Unauthorized' });
+//     }
+// };
