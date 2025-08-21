@@ -26,17 +26,19 @@ const allowedOrigins = [
 
 app.use(cors({
   origin: (origin, callback) => {
-    // Allow requests with no origin (like mobile apps or curl)
     if (!origin || allowedOrigins.includes(origin)) {
       callback(null, true);
     } else {
       callback(new Error('Not allowed by CORS'));
     }
   },
-  methods: "GET,POST,PUT,DELETE",
-  credentials: true
+  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+  credentials: true,
+  allowedHeaders: ["Authorization", "Content-Type"]
 }));
 
+// Handle OPTIONS preflight explicitly
+app.options("*", cors());
 
 
 app.use(express.json());
