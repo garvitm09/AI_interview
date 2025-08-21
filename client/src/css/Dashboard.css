@@ -1,5 +1,4 @@
-/* Dashboard.css */
-.dashboard-container {
+  .dashboard-container {
   background-color: #0f111a;
   color: white;
   padding: 2rem;
@@ -92,3 +91,31 @@
 .expand-btn:hover{
    background-color:  #a78bfa;
 }
+
+.no-sessions-box {
+  background-color: #1e2233;
+  border-radius: 12px;
+  padding: 2rem;
+  text-align: center;
+  color: white;
+  margin-top: 2rem;
+  font-size: 1rem;
+}
+
+.add-session-btn {
+  margin-top: 1rem;
+  display: inline-block;
+  text-decoration: none;
+  background-color: #7c3aed;
+  border-radius: 12px;
+  padding: 0.6rem 1.2rem;
+  color: white;
+  cursor: pointer;
+  font-size: 0.95rem;
+  transition: background-color 0.2s;
+}
+
+.add-session-btn:hover {
+  background-color: #a78bfa;
+}
+

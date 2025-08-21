@@ -1,23 +1,37 @@
 import React, { useEffect, useState } from "react";
 import "../css/Dashboard.css";
-import { useNavigate } from "react-router-dom";
-const API_BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:5000";
+import { useNavigate, Link } from "react-router-dom";
 
+const API_BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:5000";
 
 const Dashboardqna = () => {
   const [sessions, setSessions] = useState([]);
+  const [userNotFound, setUserNotFound] = useState(false);
   const [filter, setFilter] = useState("All");
   const [sortOrder, setSortOrder] = useState("recent");
   const [search, setSearch] = useState("");
   const navigate = useNavigate();
+
   const fetchSessions = async () => {
     const email = localStorage.getItem("userEmail");
+    try {
+      const res = await fetch(
+        `${API_BASE_URL}/api/qna/sessions/${email}?sort=${sortOrder}&search=${search}&filter=${filter}`
+      );
+      const data = await res.json();
 
-    const res = await fetch(
-      `${API_BASE_URL}/api/qna/sessions/${email}?sort=${sortOrder}&search=${search}&filter=${filter}`
-    );
-    const data = await res.json();
-    setSessions(data.sessions);
+      if (res.status === 404 || data.message === "User not found" || data.length === 0) {
+        setUserNotFound(true);
+        setSessions([]);
+      } else {
+        setUserNotFound(false);
+        setSessions(data.sessions || []);
+      }
+    } catch (error) {
+      console.error("Error fetching sessions:", error);
+      setUserNotFound(true);
+      setSessions([]);
+    }
   };
 
   useEffect(() => {
@@ -27,9 +41,10 @@ const Dashboardqna = () => {
   return (
     <div className="dashboard-container">
       <h1>Sessions Dashboard</h1>
+
       <div className="dashboard-controls">
         <div className="filter-buttons">
-          {['All', 'Completed', 'Upcoming'].map(type => (
+          {["All", "Completed", "Upcoming"].map((type) => (
             <button
               key={type}
               className={filter === type ? "active" : ""}
@@ -37,20 +52,21 @@ const Dashboardqna = () => {
             >
               {type}
             </button>
-          ))} 
+          ))}
         </div>
+
         <div className="search-sort">
           <input
             type="text"
             placeholder="Search sessions..."
             value={search}
-            onChange={e => setSearch(e.target.value)}
+            onChange={(e) => setSearch(e.target.value)}
           />
           <div className="dropdown">
             <label>Sort by:</label>
             <select
               value={sortOrder}
-              onChange={e => setSortOrder(e.target.value)}
+              onChange={(e) => setSortOrder(e.target.value)}
             >
               <option value="recent">Recent</option>
               <option value="alphabetical">Alphabetical</option>
@@ -60,19 +76,41 @@ const Dashboardqna = () => {
       </div>
 
       <div className="session-list">
-        {sessions.map((session, index) => (
-          <div className="session-card" key={index}>
-            <div className="session-role">{session.name}</div>
-            <div className="session-title">
-              {session.role || "Session"}
-            </div>
-            <div className="session-details">
-              {session.experience} year experience · {session.questions[0]?.userAnswer?.split(" ").length / 2 || 0} minutes · {new Date(session.startedAt).toLocaleString()}
-            </div>
-            <button className="expand-btn"
-              onClick={() => navigate(`/session-qna`, { state: { sessionId: session._id  }})}>Expand</button>
+        {userNotFound ? (
+          <div className="no-sessions-box">
+            <p>No user found. It looks like you haven't started any sessions yet.</p>
+            <Link to="/interview" className="add-session-btn">
+              Start a Session
+            </Link>
           </div>
-        ))}
+        ) : sessions.length === 0 ? (
+          <div className="no-sessions-box">
+            <p>You have no sessions at present.</p>
+            <Link to="/interview" className="add-session-btn">
+              Start a Session
+            </Link>
+          </div>
+        ) : (
+          sessions.map((session, index) => (
+            <div className="session-card" key={index}>
+              <div className="session-role">{session.name}</div>
+              <div className="session-title">{session.role || "Session"}</div>
+              <div className="session-details">
+                {session.experience} year experience ·{" "}
+                {session.questions[0]?.userAnswer?.split(" ").length / 2 || 0} minutes ·{" "}
+                {new Date(session.startedAt).toLocaleString()}
+              </div>
+              <button
+                className="expand-btn"
+                onClick={() =>
+                  navigate(`/session-qna`, { state: { sessionId: session._id } })
+                }
+              >
+                Expand
+              </button>
+            </div>
+          ))
+        )}
       </div>
     </div>
   );

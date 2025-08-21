@@ -177,7 +177,7 @@ exports.testOpenRouter = async (req, res) => {
       },
       {
         headers: {
-          'Authorization': 'Bearer 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',
+          'Authorization': `Bearer ${OPENROUTER_API_KEY}`,
           'Content-Type': 'application/json',
           'Accept': 'application/json'
         }

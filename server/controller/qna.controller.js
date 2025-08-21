@@ -18,7 +18,7 @@ exports.getSessionsByUser =  async (req, res) => {
   try {
     const user = await UserModel.findOne({ email }).lean();
     if (!user) {
-      return res.status(404).json({ error: "User not found" });
+      return res.status(200).json({ error: "User not found" });
     }
     const userId = user._id;
     let query = { userId };
